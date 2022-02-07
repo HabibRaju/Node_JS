@@ -1,19 +1,21 @@
 const express = require('express');
-const adminRouter = require('./adminRouter');
-const publicRouter = require('./publicRouter');
 const app = express();
 
 app.use(express.json());
-app.set('view engine', 'ejs');
 
 app.get('/', function (req, res){
-    console.log('This is testing...');
-    res.send("This is testing...");
+   console.log(a);
+   res.send(a);
 });
 
-app.use('/admin', adminRouter);
-app.use('/public', publicRouter);
-
+app.use((err, req, res, next) => {
+    if(err.message){
+        res.status(500).send(err.message);
+    }
+    else {
+        res.status(500).send("Error");
+    }
+});
 app.listen(5000, function(req, res) {
     console.log("listening port 5000");
 });
