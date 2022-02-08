@@ -1,21 +1,26 @@
 const express = require('express');
+const { User } = require('./dbmodel');
 const app = express();
+
 
 app.use(express.json());
 
-app.get('/', function (req, res){
-   console.log(a);
-   res.send(a);
+
+
+app.get('/', async function (req, res){
+    const id = 1;
+    const email = "raju@gmail.com";
+    const user = await User.findOne({
+        where: {
+            email
+        }
+    });
+    console.log(user.dataValues);
+    res.send(user);
+
+
 });
 
-app.use((err, req, res, next) => {
-    if(err.message){
-        res.status(500).send(err.message);
-    }
-    else {
-        res.status(500).send("Error");
-    }
-});
 app.listen(5000, function(req, res) {
     console.log("listening port 5000");
 });
