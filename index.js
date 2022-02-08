@@ -9,11 +9,6 @@ app.get('/', function (req, res){
    res.send('testing...');
 });
 
-app.get('/:id', function (req, res){
-    console.log(req.params) ;
-    res.send('ok...');
-});
-
 app.use('/user', userRoute);
 
 app.listen(5000, function(req, res) {
